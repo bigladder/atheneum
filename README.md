@@ -50,9 +50,9 @@ Unit tests are created by googletest and automatically detected by CTest and add
 
 ## Formatting: Clang format (TODO)
 
-## Code Coverage: Codecov (TODO)
+## Code Coverage: Codecov
 
-## CI: Travis-CI (TODO)
+## CI: GitHub Actions
 
 Automatic builds, testing, packaging, and deployment.
 
