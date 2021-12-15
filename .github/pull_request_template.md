@@ -22,12 +22,12 @@ Fixes # (issue)
 - [ ] I have only committed the necessary changes for this fix or feature
 - [ ] I have made corresponding changes to the documentation
 - [ ] My changes generate no new warnings
-- [ ] My changes pass all local test
+- [ ] My changes pass all local tests
 - [ ] I have ensured that my fix is effective or that my feature works as intended
 - [ ] My changes successfully pass the GitHub CI
 - [ ] I have added the necessary reviewers for this Pull Request
 
-**Note:** If you are missing any of these checks, please explain why are not need them for this Pull Request.
+**Note:** If you are missing any of these checks, please explain why they are not needed for this Pull Request.
 
 # Reviewers
 
