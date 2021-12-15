@@ -6,7 +6,7 @@ Include the motivation and context for this change. As well as a summary of the 
 Fixes # (issue)
 
 ## Checklists:
-The following are the checklist the author needs to address. The first checklist is to create an initial PR, to let others know the work progress on the repository. This should be done early in the development. Once the author is satisfied with the changes one can move on to changing the draft into a pull request. Then the author needs to complete the second checklist.
+The following checklists are the items the author needs to address. The first checklist is to create an initial PR, to let others know the work progress being done on the branch. A draft should be open early in development. When the author is satisfied with the changes, switch the draft into a pull request. Then the author needs to complete the second checklist.
 
 ### Draft Checklist:
 - [ ] PR titles should be user-synopsis style (clearly understandable in a standalone changelog context).
