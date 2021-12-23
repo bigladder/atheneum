@@ -1,46 +1,45 @@
-# Author
 ## Description
 
-Include the motivation and context for this change. As well as a summary of the behavior expected from this change. If it fixes an open issue please specify the issue number. If the change requires any new dependencies please list them below. Show or shortly describe the test you performed. If the test requires a different method of testing from ctest, please provide a brief description of how to test it.
+Replace the content in this section with:
+- The motivation and context for this change (if it is not immediately clear from the title)
+- If it fixes an open issue, specify the issue number (e.g., "fixes #XXXX")
+- A summary of the behavior expected from this change
+- A description of tests performed
 
-Fixes # (issue)
+## Author Progress Checklist:
 
-## Checklists:
-The following checklists are the items the author needs to address. The first checklist is to create an initial PR, to let others know the work progress being done on the branch. A draft should be open early in development. When the author is satisfied with the changes, switch the draft into a pull request. Then the author needs to complete the second checklist.
+- [ ] Open draft pull request
+    - [ ] Make title clearly understandable in a standalone change log context
+    - [ ] Assign yourself the issue
+    - [ ] Add at least one label
+- [ ] Make code changes (if you haven't already)
+- [ ] Self-review of code
+    - [ ] My code follows the style guidelines of this project
+    - [ ] I have performed a self-review of my code
+    - [ ] I have added comments to my code, particularly in hard-to-understand areas
+    - [ ] I have only committed the necessary changes for this fix or feature
+    - [ ] I have made corresponding changes to the documentation
+    - [ ] My changes generate no new warnings
+    - [ ] I have ensured that my fix is effective or that my feature works as intended by:
+        - [ ] exercising the code changes in the test framework, and/or
+        - [ ] manually verifying the changes (as explained in the the pull request description above)
+    - [ ] My changes pass all local tests
+    - [ ] My changes successfully passes CI checks
+- [ ] Move pull request out of draft mode and assign reviewers
+- [ ] Iterate with reviewers until all changes are approved
+    - [ ] Make changes in response to reviewer comments
+    - [ ] Re-request review in GitHub
 
-### Draft Checklist:
-- [ ] PR titles should be user-synopsis style (clearly understandable in a standalone changelog context).
-- [ ] Assign someone (often yourself) to the PR.
-- [ ] Add at least one label (enhancement or bug)
-- [ ] Add content to the description if additional clarification is needed beyond the title
+## Reviewer Checklist:
 
-### Pull request Checklist:
-
-- [ ] My code follows the style guidelines of this project
-- [ ] I have performed a self-review of my code
-- [ ] I have added comments to my code, particularly in hard-to-understand areas
-- [ ] I have only committed the necessary changes for this fix or feature
-- [ ] I have made corresponding changes to the documentation
-- [ ] My changes generate no new warnings
-- [ ] My changes pass all local tests
-- [ ] I have ensured that my fix is effective or that my feature works as intended
-- [ ] My changes successfully pass the GitHub CI
-- [ ] I have added the necessary reviewers for this Pull Request
-
-**Note:** If you are missing any of these checks, please explain why they are not needed for this Pull Request.
-
-# Reviewers
-
-## Checklist:
-
- - [ ] Read the describtion
+ - [ ] Read the pull request description
  - [ ] Perform a code review on GitHub
- - [ ] Pull the code
- - [ ] Build the code
- - [ ] Check for no new warnings
- - [ ] Test fix or features
- - [ ] Run unit test
- - [ ] Check CI: All green or justified
- - [ ] Add any comments, if applicable.
- - [ ] Approve
- - [ ] Last Reviewer: Shall merge and delete the branch
+ - [ ] Confirm all CI checks pass and there are no build warnings
+ - [ ] Pull, build, and run automated tests locally
+ - [ ] Perform manual tests of the fix or feature locally
+ - [ ] Add any review comments, if applicable
+ - [ ] Submit review in GitHub as either
+     - [ ] Request changes, or
+     - [ ] Approve
+ - [ ] Iterate with author until all changes are approved
+ - [ ] If you are the last reviewer to approve, merge the pull request and delete the branch
