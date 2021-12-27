@@ -48,7 +48,12 @@ Consistent approach to handling error callbacks.
 
 Unit tests are created by googletest and automatically detected by CTest and added to the test suite
 
-## Formatting: Clang format (TODO)
+## Formatting: Clang format
+
+The simplest way to implement formatting using the .clang-format file is to integrate clang format support into your IDE. Else,
+* On Windows, Visual Studio, set up clang format execution rules using *Tools > Options > Text Editor > C/C++ > Formatting*
+* On Mac, `brew install clang-format` and run at the command line with `clang-format -i <file>`
+* On Ubuntu, `sudo apt install clang-format` and run at the command line with `clang-format -i <file>`
 
 ## Code Coverage: Codecov
 
