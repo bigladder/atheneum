@@ -50,7 +50,7 @@ Unit tests are created by googletest and automatically detected by CTest and add
 
 ## Formatting: Clang format
 
-The simplest way to implement formatting using the .clang-format file is to integrate clang format support into your IDE. Else,
+The simplest way to implement formatting using the .clang-format file is to integrate clang format support into your IDE, which can be configured to automatically format code upon file-save. Else,
 * On Windows, Visual Studio, set up clang format execution rules using *Tools > Options > Text Editor > C/C++ > Formatting*
 * On Mac, `brew install clang-format` and run at the command line with `clang-format -i <file>`
 * On Ubuntu, `sudo apt install clang-format` and run at the command line with `clang-format -i <file>`
