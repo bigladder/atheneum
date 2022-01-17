@@ -62,7 +62,7 @@ IndentCaseLabels: false
 #CF12# IndentExternBlock
 IndentGotoLabels: false
 IndentPPDirectives: None
-IndentWidth:     2
+IndentWidth:     4
 IndentWrappedFunctionNames: false
 #CF12# InsertTrailingCommas:
 KeepEmptyLinesAtTheStartOfBlocks: true
