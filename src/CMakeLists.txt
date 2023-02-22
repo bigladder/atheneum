@@ -9,15 +9,12 @@ set(library_sources
         ${private_headers}
         )
 
-option(${PROJECT_NAME}_STATIC_LIB "Make ${PROJECT_NAME} a static library" ON)
-
 if (${PROJECT_NAME}_STATIC_LIB)
     add_library(${PROJECT_NAME} STATIC ${library_sources})
     set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "-D${PROJECT_NAME}_STATIC_DEFINE")
 else ()
     set(CMAKE_MACOSX_RPATH 1)
     add_library(${PROJECT_NAME} SHARED ${library_sources})
-    target_compile_options(${PROJECT_NAME} PRIVATE $<$<CXX_COMPILER_ID:GNU,Clang,AppleClang>:-fPIC>)
 endif ()
 
 target_include_directories(${PROJECT_NAME} PUBLIC "${PROJECT_SOURCE_DIR}/include" PRIVATE "${PROJECT_SOURCE_DIR}/src")
