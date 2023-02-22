@@ -1,6 +1,10 @@
 include(initialize-submodules)
 initialize_submodules()
 
+if (NOT TARGET fmt)
+  add_subdirectory(fmt)
+endif ()
+
 # googletest library
 if (${PROJECT_NAME}_BUILD_TESTING AND NOT TARGET gtest)
 
