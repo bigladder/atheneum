@@ -4,8 +4,8 @@ on: push
 
 jobs:
   build-and-test:
-    name: Build
     strategy:
+      fail-fast: false
       matrix:
         include:
           - os: ubuntu-latest
@@ -28,9 +28,10 @@ jobs:
       run:
         shell: bash
     runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os }} ${{ matrix.config }} coverage=${{ matrix.coverage }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Set Project Name
         run: echo "REPOSITORY_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')" >> $GITHUB_ENV
       - name: Create Build Directory
@@ -48,4 +49,4 @@ jobs:
         working-directory: build
       - name: Upload Code Coverage Report
         if: matrix.coverage == 'ON'
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3

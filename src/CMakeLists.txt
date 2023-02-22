@@ -17,6 +17,7 @@ if (${PROJECT_NAME}_STATIC_LIB)
 else ()
     set(CMAKE_MACOSX_RPATH 1)
     add_library(${PROJECT_NAME} SHARED ${library_sources})
+    target_compile_options(${PROJECT_NAME} PRIVATE $<$<CXX_COMPILER_ID:GNU,Clang,AppleClang>:-fPIC>)
 endif ()
 
 target_include_directories(${PROJECT_NAME} PUBLIC "${PROJECT_SOURCE_DIR}/include" PRIVATE "${PROJECT_SOURCE_DIR}/src")
