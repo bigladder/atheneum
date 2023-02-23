@@ -22,6 +22,8 @@ else()
   add_library(${PROJECT_NAME} SHARED ${library_sources})
 endif()
 
+target_link_libraries(${PROJECT_NAME}  PRIVATE ${PROJECT_NAME}_interface_library)
+target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 include(GenerateExportHeader)
 generate_export_header(${PROJECT_NAME})
 
