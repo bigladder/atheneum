@@ -11,6 +11,5 @@ target_compile_options(${PROJECT_NAME}_interface_library INTERFACE
     -Wextra     # Turn on extra warnings
     -Wpedantic  # Turn on warning not covered in Wall and Wextra
     #-Werror    # Turn warnings into errors
-    -fpic       # Position Independent Code
   >
 )
