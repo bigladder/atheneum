@@ -13,11 +13,11 @@ enum class MessageLevel;
 using LoggingCallbackFunction = std::function<void(MessageLevel, const std::string_view, void*)>;
 
 class AtheneumPrivate;
+class LoggingBase;
 
 class Atheneum {
   public:
-    Atheneum(LoggingCallbackFunction logging_callback_function_ = nullptr,
-             void* logging_callback_context_ = nullptr);
+    Atheneum(LoggingBase *logger_dependency);
     ~Atheneum();
     int answer();
 
