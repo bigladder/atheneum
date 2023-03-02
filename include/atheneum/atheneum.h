@@ -9,15 +9,11 @@
 
 namespace Atheneum {
 
-enum class MessageLevel;
-using LoggingCallbackFunction = std::function<void(MessageLevel, const std::string_view, void*)>;
-
 class AtheneumPrivate;
 
 class Atheneum {
   public:
-    Atheneum(LoggingCallbackFunction logging_callback_function_ = nullptr,
-             void* logging_callback_context_ = nullptr);
+    Atheneum();
     ~Atheneum();
     int answer();
 

@@ -3,14 +3,11 @@
 
 #pragma once
 
-#include "logging-base.h"
-
 namespace Atheneum {
 
-class AtheneumPrivate : public LoggingBase {
+class AtheneumPrivate {
   public:
-    AtheneumPrivate(LoggingCallbackFunction logging_callback_function_ = nullptr,
-                    void* logging_callback_context_ = nullptr);
+    AtheneumPrivate();
     int answer();
 };
 

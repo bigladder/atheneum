@@ -3,25 +3,11 @@
 
 #include <gtest/gtest.h>
 #include <atheneum/atheneum.h>
-#include "../src/logging-base.h"
 
 TEST(Atheneum, Example)
 {
     Atheneum::Atheneum atheneum;
     EXPECT_EQ(atheneum.answer(), 42);
-}
-
-TEST(LoggingBase, Warning)
-{
-    Atheneum::LoggingBase logger;
-    logger.log_message(Atheneum::MessageLevel::MESSAGE_WARNING, "This is a warning.");
-}
-
-TEST(LoggingBase, Error)
-{
-    Atheneum::LoggingBase logger;
-    EXPECT_THROW(logger.log_message(Atheneum::MessageLevel::MESSAGE_ERROR, "This is an error!"),
-                 Atheneum::AtheneumException);
 }
 
 int main(int argc, char** argv)
