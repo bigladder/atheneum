@@ -2,7 +2,7 @@
  * See the LICENSE file for additional terms and conditions. */
 
 #include <iostream>
-#include <unordered_map>
+#include <map>
 
 #include <fmt/format.h>
 
@@ -10,14 +10,16 @@
 
 namespace Atheneum {
 
-static std::unordered_map<const MessageLevel, const std::string_view> message_map {
+static std::map<const MessageLevel, const std::string_view> message_map {
     {MessageLevel::MESSAGE_ERROR, "ERROR"},
     {MessageLevel::MESSAGE_WARNING, "WARNING"},
     {MessageLevel::MESSAGE_INFO, "INFO"},
     {MessageLevel::MESSAGE_DEBUG, "DEBUG"},
 };
 
-void default_logger(const MessageLevel message_level, const std::string_view message, void*)
+void default_logging_callback_function(const MessageLevel message_level,
+                                       const std::string_view message,
+                                       void*)
 {
     std::string full_message = fmt::format("  {}: {}", message_map[message_level], message);
     if (message_level == MessageLevel::MESSAGE_ERROR) {
@@ -35,7 +37,7 @@ LoggingBase::LoggingBase(LoggingCallbackFunction logging_callback_function_,
     , logging_callback_context(logging_callback_context_)
 {
     if (!logging_callback_function) {
-        logging_callback_function = default_logger;
+        logging_callback_function = default_logging_callback_function;
     }
 }
 

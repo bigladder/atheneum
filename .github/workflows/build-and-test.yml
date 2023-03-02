@@ -50,3 +50,6 @@ jobs:
       - name: Upload Code Coverage Report
         if: matrix.coverage == 'ON'
         uses: codecov/codecov-action@v3
+        with:
+          functionalities: "gcov"
+          move_coverage_to_trash: true
