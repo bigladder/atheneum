@@ -150,6 +150,6 @@ The following clang-format list supports all (CPP-related) tags available in Cla
 1. Trim trailing white space (not supported by clang-format; must be set in the IDE)
     * **VSCode:** Set `"files.trimTrailingWhitespace"` : true
 
-1. Add extra line at the end of the file. (This is supported by clang-format 17 and higher with directive `InsertNewlineAtEOF: true`.)
+1. Add extra line at the end of the file. (This is supported by clang-format 16 and higher with directive `InsertNewlineAtEOF: true`.)
 
 1. Line ending settings (Supported by clang-format directive `LineEnding: DeriveLF`.)
