@@ -1,4 +1,5 @@
 ---
+# clang-format version 16
 Language:        Cpp
 AccessModifierOffset: -2
 AlignAfterOpenBracket: Align
@@ -128,7 +129,7 @@ IndentRequiresClause: true
 IndentWidth:     4
 IndentWrappedFunctionNames: false
 InsertBraces:    false
-InsertNewlineAtEOF: false
+InsertNewlineAtEOF: true
 InsertTrailingCommas: None
 IntegerLiteralSeparator:
   Binary:          0
