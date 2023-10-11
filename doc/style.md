@@ -59,16 +59,21 @@ NRELSolarDecathalon (vs. NrelSolarDecathalon)
 
 Variable names should begin with a lower-case letter, using underscores to separate words.
 
-* Use descriptive variables names in preference to single letters (primarily for function or class scope). Abbreviations should be avoided. Code should be as self-documenting as possible.
-* Avoid coding the variable type into its name (as in “Hungarian” notation)
+* Do use names that are
+    * descriptive
+    * intention-revealing
+    * self-documenting
+    * pronounceable
 
-Local variables:
+* Avoid
+    * coding the variable type into its name (as in “Hungarian” notation)
+    * abbreviations / single letters
+    * difference without distinction (i.e. var-latest vs. var-final)
+    * names that are cutesey or inside-joke-y
 
-    int local_variable;
+Class member variables should not use any prefix or suffix to denote type, scope, or constness.
 
-Variables of classes should not use any prefix or suffix to denote type, scope, or constness.
-
-Append  `_in` to argument variable names to explicitly prevent shadowing of arguments with names similar to member variable names.
+If function input arguments might shadow member or local variable names used inside the function, append  `_in` to the argument variable names to explicitly prevent shadowing.
 
 
 ## Enumeration names
