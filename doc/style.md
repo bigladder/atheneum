@@ -21,7 +21,9 @@ For details of best practices in code craftsmanship, refer to the CPP Core Guide
     * coding the variable type into its name (as in “Hungarian” notation)
     * abbreviations / single letters
     * difference without distinction (i.e. var-latest vs. var-final)
-    * names that are cutesey or inside-joke-y
+    * names that are too colloquial, cutesey or inside-joke-y
+
+* Be judicious about adding unit descriptors to numeric variables.
 
 ## File names
 
@@ -41,7 +43,7 @@ Use angle brackets &lt;> for external headers and quotes "" for internal headers
 Example:
 
     #include <fmt.h>
-    #include "my-class-impl.h"
+    #include "class-internals.h"
 
 ## Namespace names
 
@@ -85,7 +87,7 @@ Examples:
 
 ## Preprocessor symbols
 
-In order to avoid naming conflicts between preprocessor directives and compiled code, symbols and macros should always be all uppercase.
+In order to avoid naming conflicts between preprocessor directives and compiled code, symbols and macros should always be all uppercase. Symbols and macros (used sparingly) should also have descriptive and self-documenting names.
 
 Example:
 
@@ -97,7 +99,7 @@ Functions (free, friend, static, member functions, etc.) should begin with a low
 
 Example:
 
-    void member_function(int placeholder);
+    void use_primary_algorithm(int placeholder);
 
 ## Typedefs
 
@@ -138,6 +140,8 @@ Prefer spaces to tab characters when indenting (set your text editor to replace 
 The following clang-format list supports all (CPP-related) tags available in Clang 17, as listed in [https://clang.llvm.org/docs/ClangFormatStyleOptions.html](https://clang.llvm.org/docs/ClangFormatStyleOptions.html)
 
 ## Editor settings
+
+1. The common IDEs (Visual Studio, VS Code, CLion) can utilize text-coloring to highlight syntax or scope. We typically rely on this highlighting to differentiate member vs local variables, for example.
 
 1. Install clang-format 16+ in your path.
 
