@@ -9,6 +9,19 @@ For details of best practices in code craftsmanship, refer to the CPP Core Guide
 
 # Naming
 
+## General guidelines
+
+* Do use names that are
+    * descriptive
+    * intention-revealing
+    * self-documenting
+    * pronounceable
+
+* Avoid
+    * coding the variable type into its name (as in “Hungarian” notation)
+    * abbreviations / single letters
+    * difference without distinction (i.e. var-latest vs. var-final)
+    * names that are cutesey or inside-joke-y
 
 ## File names
 
@@ -21,14 +34,14 @@ For details of best practices in code craftsmanship, refer to the CPP Core Guide
 1. Use hyphens (“-”) to separate words in file names.
 
 
-## Includes
+### Includes
 
 Use angle brackets &lt;> for external headers and quotes "" for internal headers.
 
 Example:
 
     #include <fmt.h>
-    #include "my_class_impl.h"
+    #include "my-class-impl.h"
 
 ## Namespace names
 
@@ -37,7 +50,6 @@ Namespaces should begin with a lower-case letter, using underscores to separate 
 Example:
 
     namespace bigladder {}
-
 
 ## Class names / Struct tags
 
@@ -59,22 +71,9 @@ NRELSolarDecathalon (vs. NrelSolarDecathalon)
 
 Variable names should begin with a lower-case letter, using underscores to separate words.
 
-* Do use names that are
-    * descriptive
-    * intention-revealing
-    * self-documenting
-    * pronounceable
-
-* Avoid
-    * coding the variable type into its name (as in “Hungarian” notation)
-    * abbreviations / single letters
-    * difference without distinction (i.e. var-latest vs. var-final)
-    * names that are cutesey or inside-joke-y
-
 Class member variables should not use any prefix or suffix to denote type, scope, or constness.
 
 If function input arguments might shadow member or local variable names used inside the function, append  `_in` to the argument variable names to explicitly prevent shadowing.
-
 
 ## Enumeration names
 
