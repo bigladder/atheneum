@@ -3,9 +3,11 @@
 
 #pragma once
 
-namespace Atheneum {
+namespace Atheneum
+{
 
-class AtheneumPrivate {
+class AtheneumPrivate
+{
   public:
     AtheneumPrivate();
     int answer();

@@ -9,7 +9,8 @@
 
 #include "atheneum-private.h"
 
-namespace Atheneum {
+namespace Atheneum
+{
 
 Atheneum::Atheneum() { atheneum = std::unique_ptr<AtheneumPrivate>(new AtheneumPrivate()); }
 

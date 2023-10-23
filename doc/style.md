@@ -1,28 +1,49 @@
 # C++ Conventions and Formatting Guidelines
 
-This document is intended to summarize Big Ladder's approach to styling new C++ code, to maintain internal consistency between our original works. 
+This document is intended to summarize Big Ladder's approach to styling new C++ code, to maintain internal consistency between our original works.
+
+Note: This guide should not supersede the style used in third-party code bases - when contributing to an established project, always use the existing styles.
 
 For details of best practices in code craftsmanship, refer to the CPP Core Guidelines, actively maintained by the luminaries behind the C++ standard: [https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#main](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#main).
 
 
-# Naming 
+# Naming
 
+## General guidelines
+
+* Do use names that are
+    * descriptive
+    * intention-revealing
+    * self-documenting
+    * pronounceable
+
+* Avoid
+    * coding the variable type into its name (as in “Hungarian” notation)
+    * abbreviations / single letters
+    * difference without distinction (i.e. var-latest vs. var-final)
+    * names that are too colloquial, cutesey or inside-joke-y
+
+* Be judicious about adding unit descriptors to numeric variables.
 
 ## File names
 
-File names should be lowercase.
+1. File names should be lowercase.
 
-Interface (header) files should use the suffix “.h”.
+1. Interface (header) files should use the suffix “.h”.
 
-Implementation (code) files should use the suffix “.cpp”.
+1. Implementation (code) files should use the suffix “.cpp”.
 
-Use hyphens (“-”) to separate words in file names.
+1. Use hyphens (“-”) to separate words in file names.
 
 
-## Includes
+### Includes
 
-Use angle brackets &lt;> for external headers and quotes “” for internal headers.
+Use angle brackets &lt;> for external headers and quotes "" for internal headers.
 
+Example:
+
+    #include <fmt.h>
+    #include "class-internals.h"
 
 ## Namespace names
 
@@ -32,10 +53,9 @@ Example:
 
     namespace bigladder {}
 
-
 ## Class names / Struct tags
 
-Begin each word of the name with a capital letter. 
+Begin each word of the name with a capital letter.
 
 * If an acronym is used inside the class name, capitalize the letters of the acronym, as required, to convey meaning.
 
@@ -51,19 +71,11 @@ NRELSolarDecathalon (vs. NrelSolarDecathalon)
 
 ## Variable names
 
-Variable names should begin with a lower-case letter, using underscores to separate words. 
+Variable names should begin with a lower-case letter, using underscores to separate words.
 
-* Use descriptive variables names in preference to single letters (primarily for function or class scope). Abbreviations should be avoided. Code should be as self-documenting as possible.
-* Avoid coding the variable type into its name (as in “Hungarian” notation)
+Class member variables should not use any prefix or suffix to denote type, scope, or constness.
 
-Local variables:
-
-    int local_variable;
-
-Variables of classes should not use any prefix or suffix to denote type, scope, or constness.
-
-Append  `_in` to argument variable names to explicitly prevent shadowing of arguments with names similar to member variable names.
-
+If function input arguments might shadow member or local variable names used inside the function, append  `_in` to the argument variable names to explicitly prevent shadowing.
 
 ## Enumeration names
 
@@ -75,20 +87,49 @@ Examples:
 
 ## Preprocessor symbols
 
-In order to avoid naming conflicts between preprocessor directives and compiled code, symbols should always be all uppercase.
+In order to avoid naming conflicts between preprocessor directives and compiled code, symbols and macros should always be all uppercase. Symbols and macros (used sparingly) should also have descriptive and self-documenting names.
+
+Example:
+
+    #define ABOUT_PI 3
 
 ## Function names
 
-Functions (free, friend, static, member functions, etc.) should begin with a lower-case letter, using underscores to separate words. 
+Functions (free, friend, static, member functions, etc.) should begin with a lower-case letter, using underscores to separate words.
 
-* Functions in private class scope may begin a designated abbreviation for the class followed by an underscore
+Example:
 
+    void use_primary_algorithm(int placeholder);
 
 ## Typedefs
 
 
 ## Comments
 
+Use comments to *clarify intent* or *document unintiuitive behavior*.
+
+Use Doxygen-style comments that can be used to auto-generate class or library documentation. These should be in the header for public functions.
+
+Examples:
+```
+/// @class Atheneum atheneum.h
+/// @brief Interface for the Atheneum library
+
+class Atheneum {
+    ...
+};
+```
+
+```
+  // --------------------------------------------------------------------
+  /// @brief	Add a table of data from which interpolated results
+                will be calculated.
+  /// @param	value_vector Vector of length equal to the product
+                of dimension sizes.
+  /// @return	Index in @c value_tables of the table just added
+  // --------------------------------------------------------------------
+  std::size_t add_value_table(std::vector<double> &value_vector);
+```
 
 # Formatting
 
@@ -98,3 +139,25 @@ Prefer spaces to tab characters when indenting (set your text editor to replace 
 
 The following clang-format list supports all (CPP-related) tags available in Clang 17, as listed in [https://clang.llvm.org/docs/ClangFormatStyleOptions.html](https://clang.llvm.org/docs/ClangFormatStyleOptions.html)
 
+## Editor settings
+
+1. The common IDEs (Visual Studio, VS Code, CLion) can utilize text-coloring to highlight syntax or scope. We typically rely on this highlighting to differentiate member vs local variables, for example.
+
+1. Install clang-format 16+ in your path.
+
+    * **VSCode:** Optionally, you can change the setting `"c_cpp:clang_format_path"` to point to your system clang-format (if it's not in the system path). Otherwise,
+
+        >If not specified, and clang-format is available in the environment path, that is used. If not found in the environment path, the clang-format bundled with the [cpptools] extension will be used.
+
+        (On Mac, it's located in `~/.vscode/extensions/ms-vscode.cpptools-1.17.5-darwin-x64/LLVM/bin/clang-format`)
+
+1. Set format-on-save (or on type, if preferred)
+
+    * **VSCode:** Set `"editor.formatOnSave"` to format when you save your file, or `"editor.formatOnType"` to format as you type (triggered on the ; character).
+
+1. Trim trailing white space (not supported by clang-format; must be set in the IDE)
+    * **VSCode:** Set `"files.trimTrailingWhitespace"` : true
+
+1. Add extra line at the end of the file. (This is supported by clang-format 16 and higher with directive `InsertNewlineAtEOF: true`.)
+
+1. Line ending settings (Supported by clang-format directive `LineEnding: DeriveLF`.)
