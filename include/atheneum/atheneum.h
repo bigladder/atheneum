@@ -7,11 +7,13 @@
 #include <functional>
 #include <string_view>
 
-namespace Atheneum {
+namespace Atheneum
+{
 
 class AtheneumPrivate;
 
-class Atheneum {
+class Atheneum
+{
   public:
     Atheneum();
     ~Atheneum();
