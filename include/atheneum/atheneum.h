@@ -23,10 +23,11 @@ class Atheneum
     ~Atheneum();
 
     // --------------------------------------------------------------------------------------------
-    /// @brief	Call this function for the answer
+    /// @brief Call this function for the answer
+    /// @param default_answer Parameter specifically for documentation only
     /// @return	The answer to life, the universe, and everything
     // --------------------------------------------------------------------------------------------
-    int answer();
+    int answer(int default_answer = 42);
 
   private:
     std::unique_ptr<AtheneumPrivate> atheneum;
