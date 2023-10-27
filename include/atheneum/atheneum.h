@@ -12,11 +12,20 @@ namespace Atheneum
 
 class AtheneumPrivate;
 
+/// @class Atheneum::Atheneum atheneum.h
+/// @brief Public interface file for for the Atheneum Pimpl idiom
+
 class Atheneum
 {
   public:
     Atheneum();
+
     ~Atheneum();
+
+    // --------------------------------------------------------------------------------------------
+    /// @brief	Call this function for the answer
+    /// @return	The answer to life, the universe, and everything
+    // --------------------------------------------------------------------------------------------
     int answer();
 
   private:
