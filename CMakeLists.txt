@@ -2,10 +2,9 @@ cmake_minimum_required(VERSION 3.10) # required for gtest_discover_tests
 
 project(atheneum) # Replace
 
-set(CMAKE_CXX_CLANG_TIDY
-  clang-tidy;
-  -checks=-*,clang-analyzer-*,cppcoreguidelines-*
-  )
+find_program(CLANG_TIDY_EXE NAMES "clang-tidy")
+
+set(CLANG_TIDY_COMMAND "${CLANG_TIDY_EXE}" "-checks=-*,clang-analyzer-*,cppcoreguidelines-*")
 
 # Set a default build type if none was specified
 if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
