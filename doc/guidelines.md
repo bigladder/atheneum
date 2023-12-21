@@ -149,7 +149,9 @@ The following clang-format list supports all (CPP-related) tags available in Cla
 
         >If not specified, and clang-format is available in the environment path, that is used. If not found in the environment path, the clang-format bundled with the [cpptools] extension will be used.
 
-        (On Mac, it's located in `~/.vscode/extensions/ms-vscode.cpptools-1.17.5-darwin-x64/LLVM/bin/clang-format`)
+        On Windows, it's located in `"%USERPROFILE%"\.vscode\extensions\ms-vscode.cpptools-1.18.5-win32-x64\LLVM\bin\clang-format.exe`
+
+        On Mac, it's located in `~/.vscode/extensions/ms-vscode.cpptools-1.17.5-darwin-x64/LLVM/bin/clang-format`
 
 1. Set format-on-save (or on type, if preferred)
 
