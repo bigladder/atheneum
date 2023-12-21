@@ -145,16 +145,18 @@ The following clang-format list supports all (CPP-related) tags available in Cla
 
 1. Install clang-format 16+ in your path.
 
+    * **CLion:** clang-format is automatically enabled if the IDE detects a *.clang-format* file. (It can be toggled from the right status bar when a CPP file is in focus.)
     * **VSCode:** Optionally, you can change the setting `"c_cpp:clang_format_path"` to point to your system clang-format (if it's not in the system path). Otherwise,
 
         >If not specified, and clang-format is available in the environment path, that is used. If not found in the environment path, the clang-format bundled with the [cpptools] extension will be used.
 
-        On Windows, it's located in `"%USERPROFILE%"\.vscode\extensions\ms-vscode.cpptools-1.18.5-win32-x64\LLVM\bin\clang-format.exe`
+        * On Windows, it's located in `"%USERPROFILE%"\.vscode\extensions\ms-vscode.cpptools-1.18.5-win32-x64\LLVM\bin\clang-format.exe`
 
-        On Mac, it's located in `~/.vscode/extensions/ms-vscode.cpptools-1.17.5-darwin-x64/LLVM/bin/clang-format`
+        * On Mac, it's located in `~/.vscode/extensions/ms-vscode.cpptools-1.17.5-darwin-x64/LLVM/bin/clang-format`
 
 1. Set format-on-save (or on type, if preferred)
 
+    * **CLion:** Check the *Reformat code* box under *Preferences | Tools | Actions on Save*
     * **VSCode:** Set `"editor.formatOnSave"` to format when you save your file, or `"editor.formatOnType"` to format as you type (triggered on the ; character).
     * This setting can be global, or captured under a [cpp] tag:
 
@@ -165,16 +167,18 @@ The following clang-format list supports all (CPP-related) tags available in Cla
     ```
 
 1. Trim trailing white space (not supported by clang-format; must be set in the IDE)
+    * **CLion:** Under *Preferences | Editor | General | On Save*, check *Remove trailing spaces* 
     * **VSCode:** Set `"files.trimTrailingWhitespace"` : true
 
-1. Add extra line at the end of the file. (This is supported by clang-format 16 and higher with directive `InsertNewlineAtEOF: true`, but doesn't consistently work. In VSCode, use `"files.insertFinalNewline".`
+1. Add extra line at the end of the file. (This is supported by clang-format 16 and higher with directive `InsertNewlineAtEOF: true`, but doesn't consistently work.)
 
-    * **VSCode:**
+    * **CLion:** Under *Preferences | Editor | General | On Save*, check *Ensure every saved file ends with a line break.*
+    * **VSCode:** Set `"files.insertFinalNewLine"`
     ```
     "[cpp]": {
         "editor.formatOnType": true,
         "files.insertFinalNewline": true,
     },
     ```
-
+   
 1. Line ending settings (Supported by clang-format directive `LineEnding: DeriveLF`.)
