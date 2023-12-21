@@ -156,10 +156,25 @@ The following clang-format list supports all (CPP-related) tags available in Cla
 1. Set format-on-save (or on type, if preferred)
 
     * **VSCode:** Set `"editor.formatOnSave"` to format when you save your file, or `"editor.formatOnType"` to format as you type (triggered on the ; character).
+    * This setting can be global, or captured under a [cpp] tag:
+
+    ```
+    "[cpp]": {
+        "editor.formatOnType": true,
+    },
+    ```
 
 1. Trim trailing white space (not supported by clang-format; must be set in the IDE)
     * **VSCode:** Set `"files.trimTrailingWhitespace"` : true
 
-1. Add extra line at the end of the file. (This is supported by clang-format 16 and higher with directive `InsertNewlineAtEOF: true`.)
+1. Add extra line at the end of the file. (This is supported by clang-format 16 and higher with directive `InsertNewlineAtEOF: true`, but doesn't consistently work. In VSCode, use `"files.insertFinalNewline".`
+
+    * **VSCode:**
+    ```
+    "[cpp]": {
+        "editor.formatOnType": true,
+        "files.insertFinalNewline": true,
+    },
+    ```
 
 1. Line ending settings (Supported by clang-format directive `LineEnding: DeriveLF`.)
