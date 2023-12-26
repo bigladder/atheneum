@@ -3,24 +3,14 @@
 
 #pragma once
 
-#include <memory>
-#include <functional>
-#include <string_view>
-
 namespace Atheneum
 {
 
-class AtheneumPrivate;
-
-class Atheneum
+class AtheneumPrivate
 {
   public:
-    Atheneum();
-    ~Atheneum();
+    AtheneumPrivate();
     int answer();
-
-  private:
-    std::unique_ptr<AtheneumPrivate> atheneum;
 };
 
 } // namespace Atheneum
