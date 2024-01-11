@@ -1,17 +1,14 @@
 # Common interface library is used to set flags that are always applied to this project regardless of whether it is a
 # top level project or not.
-add_library(${PROJECT_NAME}_common_interface INTERFACE)
-
-# '*' indicates CMake default option
-# '+' indicates default compiler behavior
+add_library(${PROJECT_NAME}_build_options INTERFACE)
 
 
 #==================#
 # Compiler options #
 #==================#
 
-target_compile_options(${PROJECT_NAME}_common_interface INTERFACE
-        $<$<CXX_COMPILER_ID:MSVC>: # Visual C++ (VS 2013)
+target_compile_options(${PROJECT_NAME}_build_options INTERFACE
+        $<$<CXX_COMPILER_ID:MSVC>:
         /GR
         /nologo
         /W4
@@ -43,7 +40,6 @@ target_compile_options(${PROJECT_NAME}_common_interface INTERFACE
         -fsignaling-nans  # Disable optimizations that may have concealed NaN behavior
         >
         >
-        # -finline-limit=2000 # More aggressive inlining   This is causing unit test failures on Ubuntu 14.04
         >
         )
 
@@ -51,7 +47,10 @@ target_compile_options(${PROJECT_NAME}_common_interface INTERFACE
 #  Linker options  #
 #==================#
 
-target_link_options(${PROJECT_NAME}_common_interface INTERFACE
+# '*' indicates CMake default option
+# '+' indicates default compiler behavior
+
+target_link_options(${PROJECT_NAME}_build_options INTERFACE
         $<$<CXX_COMPILER_ID:GNU>:
         -pthread
         >
