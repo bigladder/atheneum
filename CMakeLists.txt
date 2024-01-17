@@ -26,7 +26,7 @@ if (NOT ${PROJECT_NAME}_STATIC_LIB)
     set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 endif ()
 
-include(compile-flags)
+include(build-options-interface)
 
 # Set up testing/coverage
 if (${PROJECT_NAME}_BUILD_TESTING)
