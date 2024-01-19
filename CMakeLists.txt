@@ -15,14 +15,19 @@ find_package(Git QUIET)
 
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
-option(${PROJECT_NAME}_BUILD_TESTING "Build ${PROJECT_NAME} testing targets" OFF)
-option(${PROJECT_NAME}_COVERAGE "Generate ${PROJECT_NAME} coverage reports" OFF)
+include(CMakeDependentOption)
+
+cmake_dependent_option(${PROJECT_NAME}_BUILD_TESTING "Build ${PROJECT_NAME} testing targets" ON "${PROJECT_NAME}_IS_TOP_LEVEL" OFF)
+option(${PROJECT_NAME}_COVERAGE "Add ${PROJECT_NAME} coverage reports" OFF)
+#cmake_dependent_option(${PROJECT_NAME}_BUILD_EXAMPLES "Build ${PROJECT_NAME} examples" ON "${PROJECT_NAME}_IS_TOP_LEVEL" OFF)
+cmake_dependent_option(${PROJECT_NAME}_WARNINGS_AS_ERRORS "Treat warnings in ${PROJECT_NAME} as errors" ON "${PROJECT_NAME}_IS_TOP_LEVEL" OFF)
 option(${PROJECT_NAME}_STATIC_LIB "Make ${PROJECT_NAME} a static library" ON)
 
 if (NOT ${PROJECT_NAME}_STATIC_LIB)
     set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 endif ()
 
+include(build-options-interface)
 
 # Set up testing/coverage
 if (${PROJECT_NAME}_BUILD_TESTING)
@@ -36,6 +41,10 @@ endif ()
 # Add subdirectories
 add_subdirectory(vendor)
 add_subdirectory(src)
+
+#if (${PROJECT_NAME}_BUILD_EXAMPLES)
+#    add_subdirectory(examples)
+#endif ()
 
 if (${PROJECT_NAME}_BUILD_TESTING)
     add_subdirectory(test)
