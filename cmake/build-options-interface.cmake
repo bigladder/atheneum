@@ -12,6 +12,7 @@ target_compile_options(${PROJECT_NAME}_build_options INTERFACE
         /GR
         /nologo
         /W4
+        /wd4100 # unreferenced formal parameter
         $<$<BOOL:${${PROJECT_NAME}_WARNINGS_AS_ERRORS}>:
         /WX     # Turn warnings into errors
         >

@@ -21,16 +21,20 @@ add_custom_command(OUTPUT ${DOXYGEN_INDEX_FILE}
 
 add_custom_target(Doxygen ALL DEPENDS ${DOXYGEN_INDEX_FILE})
 
-execute_process(COMMAND poetry install)
-
-find_package(Sphinx REQUIRED)
-
 set(SPHINX_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/sphinx-source)
 set(SPHINX_BUILD ${CMAKE_CURRENT_BINARY_DIR}/sphinx)
+set(SPHINX_PROGRAM "sphinx-build")
 
-# SPHINX_EXECUTABLE is sphinx-build, not sphinx
+# Creating a poetry environment during the configuration phase would be ideal, but the subsequent
+# build-phase commands don't seem to activate the same environment before running tasks.
+# As a result, the install is performed below as part of the target's command sequence.
+# We can only look for executables installed as part of the poetry environment (sphinx-build)
+# after the install, so we can't use find_program or similar to get the most general path.
+# Fortunately the poetry environment is minimal, so paths like ${SPHINX_PROGRAM} can be assumed.
+
 add_custom_target(Sphinx ALL
-                  COMMAND poetry run ${SPHINX_EXECUTABLE} -b html
+                  COMMAND poetry install
+                  COMMAND poetry run ${SPHINX_PROGRAM} -b html
                   -Dbreathe_projects.${PROJECT_NAME}=${DOXYGEN_OUTPUT_DIR}/xml
                   ${SPHINX_SOURCE} ${SPHINX_BUILD}
                   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
