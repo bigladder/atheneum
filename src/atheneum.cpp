@@ -16,7 +16,7 @@ Atheneum::Atheneum() { atheneum = std::unique_ptr<AtheneumPrivate>(new AtheneumP
 
 Atheneum::~Atheneum() {}
 
-int Atheneum::answer(int default_answer) { return atheneum->answer(); }
+int Atheneum::answer(int) { return atheneum->answer(); }
 
 AtheneumPrivate::AtheneumPrivate() {}
 

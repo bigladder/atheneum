@@ -25,12 +25,11 @@ set(SPHINX_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/sphinx-source)
 set(SPHINX_BUILD ${CMAKE_CURRENT_BINARY_DIR}/sphinx)
 set(SPHINX_PROGRAM "sphinx-build")
 
-# Creating a poetry environment during the configuration phase would be ideal, but the subsequent
-# build-phase commands don't seem to activate the same environment before running tasks.
-# As a result, the install is performed below as part of the target's command sequence.
-# We can only look for executables installed as part of the poetry environment (sphinx-build)
-# after the install, so we can't use find_program or similar to get the most general path.
-# Fortunately the poetry environment is minimal, so paths like ${SPHINX_PROGRAM} can be assumed.
+# The poetry (dependency) installation is performed below as part of the target's command sequence.
+# The order of operations is important: 1. Install sphinx/breathe as part of the project's dependencies
+# 2. Find or assert the path to sphinx, 3. Run sphinx/breathe
+# Note that "poetry run" during CMake's build phase does not activate an environment installed
+# during CMake's configuration phase!
 
 add_custom_target(Sphinx ALL
                   COMMAND poetry install
