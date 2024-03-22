@@ -19,7 +19,7 @@ add_custom_command(OUTPUT ${DOXYGEN_INDEX_FILE}
                    MAIN_DEPENDENCY ${DOXYFILE_OUT} ${DOXYFILE_IN}
                    COMMENT "Generating docs")
 
-add_custom_target(Doxygen ALL DEPENDS ${DOXYGEN_INDEX_FILE})
+add_custom_target(${PROJECT_NAME}_doxygen ALL DEPENDS ${DOXYGEN_INDEX_FILE})
 
 set(SPHINX_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/sphinx-source)
 set(SPHINX_BUILD ${CMAKE_CURRENT_BINARY_DIR}/sphinx)
@@ -31,7 +31,7 @@ set(SPHINX_PROGRAM "sphinx-build")
 # Note that "poetry run" during CMake's build phase does not activate an environment installed
 # during CMake's configuration phase!
 
-add_custom_target(Sphinx ALL
+add_custom_target(${PROJECT_NAME}_sphinx ALL
                   COMMAND poetry install
                   COMMAND poetry run ${SPHINX_PROGRAM} -b html
                   -Dbreathe_projects.${PROJECT_NAME}=${DOXYGEN_OUTPUT_DIR}/xml
