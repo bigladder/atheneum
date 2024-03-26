@@ -12,8 +12,8 @@ namespace Atheneum
 
 class AtheneumPrivate;
 
-/// @class Atheneum::Atheneum atheneum.h
-/// @brief Public interface file for for the Atheneum Pimpl idiom
+/// @class Atheneum atheneum.h
+/// @brief Public interface for for the Atheneum Pimpl idiom
 
 class Atheneum
 {
