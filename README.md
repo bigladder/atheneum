@@ -60,6 +60,8 @@ IDE, which can be configured to automatically format code upon file-save. Else,
 * On Mac, `brew install clang-format` and run at the command line with `clang-format -i <file>`
 * On Ubuntu, `sudo apt install clang-format` and run at the command line with `clang-format -i <file>`
 
+**NOTE**: ensure the version of clang-format you're development team is using locally matches the version used in `.github/workflows/clang-format-check.yml` or you may get false errors. The .clang-format file can be set to a version earlier than your current.
+
 ## Code Coverage: Codecov
 
 ## CI: GitHub Actions
