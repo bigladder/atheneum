@@ -5,11 +5,11 @@ jobs:
     name: Doxygen completeness check
     runs-on: ubuntu-latest
     steps:
-      - name: Create doxygen config
-        run: cmake -P "${{github.workspace}}/cmake/generate-doxygen-config.cmake"
-      - uses: actions/checkout@v3
-      - name: Run doxygen for C++ programs.
-        uses: mattnotmitt/doxygen-action@v1.9.5
-        with:
-            working-directory: '.'
-            doxyfile-path: 'doxygen.cfg'
+    - uses: actions/checkout@v3
+    - name: Create CMake config file
+      run: cmake -P ${{github.workspace}}/cmake/generate-doxygen-config.cmake
+    - name: Run doxygen for C++ programs.
+      uses: mattnotmitt/doxygen-action@v1.9.5
+      with:
+          working-directory: '.'
+          doxyfile-path: 'doxygen.cfg'
