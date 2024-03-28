@@ -40,7 +40,7 @@ html_theme_options = {
     'includehidden': True,
     'titles_only': False
 }
-html_static_path = ['_static']
+#html_static_path = ['_static']
 breathe_default_project = project
 breathe_default_members = ('members', 'undoc-members')
 # set up breathe_projects here, or using -D on sphinx-build command line

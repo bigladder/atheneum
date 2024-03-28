@@ -12,7 +12,7 @@ namespace Atheneum
 
 class AtheneumPrivate;
 
-/// @class Atheneum atheneum.h
+/// @class Atheneum::Atheneum atheneum.h
 /// @brief Public interface for for the Atheneum Pimpl idiom
 
 class Atheneum
@@ -24,10 +24,10 @@ class Atheneum
 
     // --------------------------------------------------------------------------------------------
     /// @brief Call this function for the answer
-    /// @param default_answer Parameter specifically for documentation only
     /// @return	The answer to life, the universe, and everything
     // --------------------------------------------------------------------------------------------
-    int answer(int default_answer = 42);
+    int answer(int default_answer = 42 /*!< [in] Parameter specifically for documentation only */
+    );
 
   private:
     std::unique_ptr<AtheneumPrivate> atheneum;
