@@ -17,9 +17,7 @@ type and scrambled it to make a type specimen book. From `<https://www.lipsum.co
 Docs
 ====
 
-.. doxygennamespace:: Atheneum
-   :project: atheneum
-
+.. doxygenclass:: Atheneum::Atheneum
 
 Indices and tables
 ==================

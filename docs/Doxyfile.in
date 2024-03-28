@@ -860,14 +860,14 @@ WARN_IF_UNDOCUMENTED   = YES
 # using markup commands wrongly.
 # The default value is: YES.
 
-WARN_IF_DOC_ERROR      = YES
+WARN_IF_DOC_ERROR      = @WARN_ON_DOC_ERROR@
 
 # If WARN_IF_INCOMPLETE_DOC is set to YES, doxygen will warn about incomplete
 # function parameter documentation. If set to NO, doxygen will accept that some
 # parameters have no documentation without warning.
 # The default value is: YES.
 
-WARN_IF_INCOMPLETE_DOC = YES
+WARN_IF_INCOMPLETE_DOC = @WARN_ON_DOC_ERROR@
 
 # This WARN_NO_PARAMDOC option can be enabled to get warnings for functions that
 # are documented, but have no documentation for their parameters or return

@@ -3,9 +3,10 @@ find_package(Doxygen REQUIRED)
 set(DOXYFILE_IN ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in)
 set(DOXYFILE_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
 
+set(WARN_ON_DOC_ERROR "YES")
 set(DOXYGEN_INPUT_DIR ${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME})
 set(DOXYGEN_OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/doxygen)
-set(DOXYGEN_INDEX_FILE ${DOXYGEN_OUTPUT_DIR}/html/index.html)
+#set(DOXYGEN_INDEX_FILE ${DOXYGEN_OUTPUT_DIR}/html/index.html)
 file(GLOB_RECURSE project_public_headers ${DOXYGEN_INPUT_DIR}/*.h)
 
 # Replace variables inside @@ with the current values
