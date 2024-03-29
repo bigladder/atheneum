@@ -10,6 +10,7 @@ python = ">=3.9"
 [tool.poetry.dev-dependencies]
 sphinx = "7.2.6"
 breathe = "*"
+myst-parser = "*"
 sphinx-rtd-theme = "*"
 
 [build-system]

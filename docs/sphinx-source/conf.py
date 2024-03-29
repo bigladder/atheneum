@@ -9,18 +9,19 @@
 # pylint: disable=C0103
 
 project = 'atheneum'
-copyright = '2023, Big Ladder Software' # pylint: disable=redefined-builtin
+copyright = '2024, Big Ladder Software' # pylint: disable=redefined-builtin
 author = 'Big Ladder Software'
-release = '2023'
+release = '2024'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ["breathe"]
+extensions = ["breathe",
+              "myst_parser",
+              ]
 
 templates_path = ['_templates']
 exclude_patterns = []
-
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
@@ -40,7 +41,7 @@ html_theme_options = {
     'includehidden': True,
     'titles_only': False
 }
-#html_static_path = ['_static']
+#html_static_path = ['_static'] # Uncomment to add static content (e.g. CSS)
 breathe_default_project = project
 breathe_default_members = ('members', 'undoc-members')
 # set up breathe_projects here, or using -D on sphinx-build command line
