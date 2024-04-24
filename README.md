@@ -15,7 +15,7 @@ ctest -C Release
 
 - root
     - cmake
-    - docs
+    - doc
     - examples
     - include
     - src
@@ -37,10 +37,25 @@ Manages the overall build with specific scripts for handling:
 - Optional static or dynamic libraries
 - Handling of MSVC and Windows specific requirements (e.g., MT/MD flags, export headers)
 
-## Dependencies: Git submodules
+## Dependencies
+### Git submodules
 
 Where possible, dependencies are added using git submodules. In a few exceptional cases, a dependency may be vendored
 directly in the root repository.
+
+### Python / Poetry
+Some supporting functionality, such as building viewer-friendly web-hostable documentation, is implemented with [Python](https://python.org) and its libraries. We are currently supporting Python 3.7 and higher.
+
+This project uses the [Poetry](https://python-poetry.org/docs/#installation) python-package management tool. Python is used internally by the CMake build scripts; the CMake targets create a Poetry virtual environment in which the project's Python dependencies are installed, and in which commands are then run to build that target.
+
+### Clang format
+Use version 16+.
+
+*Be aware the the Github workflow for checking clang-format may give different results than your desktop version.
+
+### Documentation
+
+C++ in-source documentation is written with [Doxygen](https://doxygen.nl) comments (see [guidelines](./doc/guidelines.md)). As many open-source projects host customizable sphinx-style help pages for viewer-friendly consumption, the Atheneum workflow also converts
 
 ## Error handling (TODO)
 
