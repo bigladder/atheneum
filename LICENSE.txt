@@ -1,4 +1,4 @@
-Copyright (c) 2019 Big Ladder Software, LLC
+Copyright (c) 2024 Big Ladder Software, LLC
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 

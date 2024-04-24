@@ -31,7 +31,7 @@ This setup relies on the projects being managed in a Git repository.
 Manages the overall build with specific scripts for handling:
 
 - Defaulting build type (i.e., Release)
-- [Uniform compiler flags](cmake/compile-flags.cmake)
+- [Uniform compiler flags](cmake/build-options-interface.cmake)
 - Identifying build target architecture (i.e., operating system, compiler, and CPU instruction architecture) (TODO)
 - Automatic versioning based on Git repository tags (TODO)
 - Optional static or dynamic libraries

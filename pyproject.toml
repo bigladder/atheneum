@@ -2,7 +2,7 @@
 name = "sphinx-docs"
 version = "1.0.0"
 description = ""
-authors = ["Atheneum"]
+authors = ["Atheneum"] # Replace
 
 [tool.poetry.dependencies]
 python = ">=3.9"
