@@ -1,63 +1,25 @@
-#make a list of all submodules in .gitmodules
-macro(make_submodules_list)
-  if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
-    set(git_modules_file "${PROJECT_SOURCE_DIR}/.gitmodules")
-    if (EXISTS ${git_modules_file})
-      file(STRINGS ${git_modules_file} file_lines)
-      set(submoduleNames)
-      foreach(line ${file_lines})
-        if (${line} MATCHES "url =")
-          string(REGEX REPLACE "\\s*url = .*/(.*).git" "\\1" name "${line}")
-          string(STRIP "${name}" name)
-          if (DEFINED submoduleNames)
-            set(submoduleNames ${submoduleNames} ${name})
-          else()
-            set(submoduleNames ${name})
-          endif()
-        endif()
-      endforeach()
-    endif()
-  endif()
-endmacro()
-
 #update the named submodule
-macro(update_submodule arg)
-  if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${arg}")
-    message(FATAL_ERROR "Submodule directory \"${CMAKE_CURRENT_SOURCE_DIR}/${arg}\" does not exist")
+macro(update_submodule module_name)
+  if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${module_name}")
+    message(FATAL_ERROR "Submodule directory \"${CMAKE_CURRENT_SOURCE_DIR}/${module_name}\" does not exist")
   endif()
 
   # Initialize submodule if it hasn't already been cloned
-  if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${arg}/.git")
-    message(STATUS "Initialize ${arg} submodule")
-    execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive "${CMAKE_CURRENT_SOURCE_DIR}/${arg}"
+  if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${module_name}/.git")
+    message(STATUS "Initialize ${module_name} submodule")
+    execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init "${CMAKE_CURRENT_SOURCE_DIR}/${module_name}"
             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
             RESULT_VARIABLE GIT_SUBMOD_RESULT)
     if(NOT GIT_SUBMOD_RESULT EQUAL "0")
-      message(FATAL_ERROR "git submodule update --init --recursive ${CMAKE_CURRENT_SOURCE_DIR}/${arg} failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
+      message(FATAL_ERROR "git submodule update --init ${CMAKE_CURRENT_SOURCE_DIR}/${module_name} failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
     endif()
-  endif()
-endmacro()
-
-#update all submodules listed in .gitmodules
-macro(initialize_submodules)
-  make_submodules_list()
-  if (DEFINED submoduleNames)
-    foreach (submoduleName ${submoduleNames})
-      update_submodule(${submoduleName})
-    endforeach()
-    unset(submoduleNames)
   endif()
 endmacro()
 
 #update the named submodule iff it is listed in .gitmodules
-macro(initialize_submodule arg)
-  make_submodules_list()
-  if (DEFINED submoduleNames)
-    foreach (submoduleName ${submoduleNames})
-      if("${submoduleName}" MATCHES "${arg}")
-        update_submodule(${submoduleName})
-      endif()
-    endforeach()
-    unset(submoduleNames)
+macro(add_submodule module_name)
+  if (NOT TARGET ${module_name}) # Don't clone or add subdirectory if the module/target already exists
+    update_submodule(${module_name}) # Maybe this could be expanded in this macro instead of being a separate macro?
+    add_subdirectory(${module_name})
   endif()
 endmacro()
