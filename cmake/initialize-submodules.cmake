@@ -7,10 +7,6 @@
 macro(add_submodule module_name)
 
   message(STATUS "Attempting to add \"${module_name}\" to project \"${PROJECT_NAME}\"")
-  #check of specific path is provided
-  set(MacroArgs ${ARGN})
-  list(LENGTH MacroArgs NumArgs)
-
   set(have_submodule FALSE)
   set(have_path FALSE)
 
