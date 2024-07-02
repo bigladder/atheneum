@@ -18,5 +18,5 @@ if (${PROJECT_NAME}_BUILD_TESTING AND NOT TARGET gtest)
     set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
     mark_as_advanced(BUILD_GTEST BUILD_GMOCK INSTALL_GTEST)
 
-    add_submodule(gtest ${CMAKE_CURRENT_SOURCE_DIR}/googletest)
+    add_submodule(gtest ${CMAKE_CURRENT_SOURCE_DIR}/googletest googletest)
 endif ()
