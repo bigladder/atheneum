@@ -1,6 +1,6 @@
-[submodule "googletest"]
+[submodule "vendor/googletest"]
 	path = vendor/googletest
 	url = https://github.com/google/googletest.git
-[submodule "fmt"]
+[submodule "vendor/fmt"]
 	path = vendor/fmt
 	url = https://github.com/fmtlib/fmt.git

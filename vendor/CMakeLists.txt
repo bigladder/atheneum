@@ -1,6 +1,6 @@
 include(initialize-submodules)
 
-add_submodule(fmt)
+add_submodule(fmt vendor/fmt)
 if (NOT TARGET fmt)
     set(FMT_INSTALL OFF CACHE BOOL "" FORCE)
     mark_as_advanced(FMT_CMAKE_DIR FMT_CUDA_TEST FMT_DEBUG_POSTFIX FMT_DOC FMT_FUZZ FMT_INC_DIR FMT_INSTALL FMT_INSTALL
@@ -18,5 +18,5 @@ if (${PROJECT_NAME}_BUILD_TESTING AND NOT TARGET gtest)
     set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
     mark_as_advanced(BUILD_GTEST BUILD_GMOCK INSTALL_GTEST)
 
-    add_submodule(gtest ${CMAKE_CURRENT_SOURCE_DIR}/googletest googletest)
+    add_submodule(gtest vendor/googletest ${CMAKE_CURRENT_SOURCE_DIR}/googletest)
 endif ()

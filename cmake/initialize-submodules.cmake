@@ -7,21 +7,25 @@
 macro(add_submodule module_name)
 
   message(STATUS "Attempting to add \"${module_name}\" to project \"${PROJECT_NAME}\"")
+
   set(have_submodule FALSE)
   set(have_path FALSE)
 
-  # first optional argument is module path
-  if(NumArgs GREATER 0)
-    set(module_path ${ARGV1})
-  else()
-    set(module_path ${CMAKE_CURRENT_SOURCE_DIR}/${module_name})
-  endif()
+  set(Args ${ARGN})
+  list(LENGTH Args NumArgs)
 
-  # second optional argument is module reference
-  if(NumArgs GREATER 1)
-    set(module_ref_name ${ARGV2})
+  # first optional argument is module reference
+  if(NumArgs GREATER 0)
+    set(module_ref_name ${ARGV1})
   else()
     set(module_ref_name ${module_name})
+  endif()
+
+  # second optional argument is module path
+  if(NumArgs GREATER 1)
+    set(module_path ${ARGV2})
+  else()
+    set(module_path ${CMAKE_CURRENT_SOURCE_DIR}/${module_name})
   endif()
 
   set(is_submodule FALSE)
@@ -59,9 +63,9 @@ macro(add_submodule module_name)
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                   RESULT_VARIABLE GIT_SUBMOD_RESULT)
           if(GIT_SUBMOD_RESULT EQUAL "0")
-            message(STATUS "Successfully updated submodule \"${module_name}\" at ${submodule_path}")
+            message(STATUS "Successfully updated submodule \"${module_name}\"")
           else()
-            message(FATAL_ERROR "Unable to update submodule \"${module_name}\" at ${submodule_path}")
+            message(FATAL_ERROR "Unable to update submodule \"${module_name}\"")
           endif()
         endif()
       else()
