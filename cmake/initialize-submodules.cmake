@@ -1,20 +1,19 @@
 #update the named submodule
 
 #attempt to add the submodule
-#optional arguments:
-# 1 - path
-# 2 - alternate reference name
+#optional argument is module path
 macro(add_submodule module_name)
 
     set(Args ${ARGN})
     list(LENGTH Args NumArgs)
 
     set(target_name ${module_name})
-    set(module_path ${module_name})
-
-    if(NumArgs GREATER 0)   # optional argument is module reference
+    if(NumArgs GREATER 0)
         set(module_path ${ARGV1})
+    else()
+        set(module_path ${module_name})
     endif()
+    set(full_module_path ${module_path})
 
     if(GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
         set(git_modules_file "${PROJECT_SOURCE_DIR}/.gitmodules")
@@ -33,7 +32,9 @@ macro(add_submodule module_name)
                         execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive "${submodule}"
                                 WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
                                 RESULT_VARIABLE GIT_SUBMOD_RESULT)
-                        if(NOT GIT_SUBMOD_RESULT EQUAL "0")
+                        if(GIT_SUBMOD_RESULT EQUAL "0")
+                            set(full_module_path ${CMAKE_CURRENT_SOURCE_DIR}/${module_path})
+                        else()
                             message(FATAL_ERROR "Unable to update submodule \"${submodule}\"")
                         endif()
                         break()
@@ -45,10 +46,9 @@ macro(add_submodule module_name)
         endif()
     endif()
 
-    if (NOT TARGET ${target_name} AND (EXISTS "${module_path}"))
+    if (NOT TARGET ${target_name} AND (EXISTS "${full_module_path}"))
         message(STATUS "Adding subdirectory \"${module_path}\" to project \"${PROJECT_NAME}\"")
         add_subdirectory(${module_path})
     endif()
-
 
 endmacro()
