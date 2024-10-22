@@ -18,17 +18,17 @@ macro(add_submodule submodule_name)
         set(target_name "${submodule_name}")
     endif ()
 
-    # Clone repository
     if (DEFINED add_${submodule_name}_args_PARENT_SUBMODULE_PATH)
         set(submodule_path "${add_${submodule_name}_args_PARENT_SUBMODULE_PATH}/vendor/${submodule_name}")
     else ()
         set(submodule_path "${CMAKE_CURRENT_SOURCE_DIR}/${submodule_name}")
     endif ()
 
+    # Clone repository
     if (GIT_FOUND AND NOT EXISTS "${submodule_path}/.git")
-        message(STATUS "Updating submodule \"${submodule_name}\"")
-        execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init "${submodule_path}"
-                WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        message(STATUS "Cloning submodule \"${submodule_name}\"")
+        execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init ${submodule_path}
+                WORKING_DIRECTORY ${submodule_path}
                 RESULT_VARIABLE GIT_SUBMOD_RESULT)
         if (NOT GIT_SUBMOD_RESULT EQUAL "0")
             message(FATAL_ERROR "Unable to update submodule \"${submodule_name}\"")
@@ -37,26 +37,30 @@ macro(add_submodule submodule_name)
 
     # Add subdirectory
     if (NOT TARGET ${target_name} AND (EXISTS "${submodule_path}"))
+        message(STATUS "Adding submodule: ${submodule_path}")
         add_subdirectory(${submodule_path})
     endif ()
 
     # Cache on
     if (DEFINED add_${submodule_name}_args_CACHE_ON)
-        foreach (add_${submodule_name}_args_CACHE_ON variable)
+        foreach (variable ${add_${submodule_name}_args_CACHE_ON})
+            message(STATUS "CACHE On: ${variable}")
             set(variable ON CACHE BOOL "" FORCE)
         endforeach ()
     endif ()
 
     # Cache off
     if (DEFINED add_${submodule_name}_args_CACHE_OFF)
-        foreach (add_${submodule_name}_args_CACHE_OFF variable)
+        foreach (variable ${add_${submodule_name}_args_CACHE_OFF})
+            message(STATUS "CACHE Off: ${variable}")
             set(variable OFF CACHE BOOL "" FORCE)
         endforeach ()
     endif ()
 
     # Mark as advanced
     if (DEFINED add_${submodule_name}_args_MARK_AS_ADVANCED)
-        foreach (add_${submodule_name}_args_MARK_AS_ADVANCED variable)
+        foreach (variable ${add_${submodule_name}_args_MARK_AS_ADVANCED})
+            message(STATUS "Mark Advanced: ${variable}")
             mark_as_advanced(variable)
         endforeach ()
     endif ()
