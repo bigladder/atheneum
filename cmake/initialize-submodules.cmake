@@ -37,14 +37,12 @@ macro(add_submodule submodule_name)
 
     # Add subdirectory
     if (NOT TARGET ${target_name} AND (EXISTS "${submodule_path}"))
-        message(STATUS "Adding submodule: ${submodule_path}")
         add_subdirectory(${submodule_path})
     endif ()
 
     # Cache on
     if (DEFINED add_${submodule_name}_args_CACHE_ON)
         foreach (variable ${add_${submodule_name}_args_CACHE_ON})
-            message(STATUS "CACHE On: ${variable}")
             set(variable ON CACHE BOOL "" FORCE)
         endforeach ()
     endif ()
@@ -52,7 +50,6 @@ macro(add_submodule submodule_name)
     # Cache off
     if (DEFINED add_${submodule_name}_args_CACHE_OFF)
         foreach (variable ${add_${submodule_name}_args_CACHE_OFF})
-            message(STATUS "CACHE Off: ${variable}")
             set(variable OFF CACHE BOOL "" FORCE)
         endforeach ()
     endif ()
@@ -60,7 +57,6 @@ macro(add_submodule submodule_name)
     # Mark as advanced
     if (DEFINED add_${submodule_name}_args_MARK_AS_ADVANCED)
         foreach (variable ${add_${submodule_name}_args_MARK_AS_ADVANCED})
-            message(STATUS "Mark Advanced: ${variable}")
             mark_as_advanced(variable)
         endforeach ()
     endif ()
