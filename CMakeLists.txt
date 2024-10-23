@@ -11,8 +11,6 @@ if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
             "MinSizeRel" "RelWithDebInfo")
 endif ()
 
-find_package(Git QUIET)
-
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 include(CMakeDependentOption)
