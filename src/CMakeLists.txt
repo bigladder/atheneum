@@ -7,7 +7,7 @@ set(library_sources
         ${sources}
         ${public_headers}
         ${private_headers}
-        )
+)
 
 if (${PROJECT_NAME}_STATIC_LIB)
     add_library(${PROJECT_NAME} STATIC ${library_sources})
@@ -17,7 +17,7 @@ else ()
     add_library(${PROJECT_NAME} SHARED ${library_sources})
 endif ()
 
-target_include_directories(${PROJECT_NAME} PUBLIC "${PROJECT_SOURCE_DIR}/include" PRIVATE "${PROJECT_SOURCE_DIR}/src")
+target_include_directories(${PROJECT_NAME} PUBLIC "${PROJECT_SOURCE_DIR}/include" "${PROJECT_BINARY_DIR}/include" PRIVATE "${PROJECT_SOURCE_DIR}/src")
 
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 

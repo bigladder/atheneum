@@ -29,6 +29,10 @@ endif ()
 
 include(build-options-interface)
 
+# Automatic generation of version info
+include(git-versioning)
+make_version_header()
+
 # Set up testing/coverage
 if (${PROJECT_NAME}_BUILD_TESTING)
     enable_testing()
