@@ -31,7 +31,9 @@ include(build-options-interface)
 
 # Automatic generation of version info
 include(git-versioning)
+process_git_version()
 make_version_header()
+message(STATUS "Building ${PROJECT_NAME} ${${PROJECT_NAME}_version}")
 
 # Set up testing/coverage
 if (${PROJECT_NAME}_BUILD_TESTING)

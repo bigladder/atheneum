@@ -14,85 +14,87 @@ macro(git_command args output_variable)
     set(${output_variable} "${temp_variable}")
 endmacro()
 
-find_package(Git)
+macro(process_git_version)
 
-if (GIT_FOUND)
+    find_package(Git)
 
-    # Branch
-    git_command("rev-parse;--abbrev-ref;HEAD" ${PROJECT_NAME}_git_branch)
+    if (GIT_FOUND)
 
-    # SHA
-    git_command("rev-parse;--verify;--short;HEAD" ${PROJECT_NAME}_git_sha)
+        # Branch
+        git_command("rev-parse;--abbrev-ref;HEAD" ${PROJECT_NAME}_git_branch)
 
-    # Tag 
-    git_command("tag" tag_list)
+        # SHA
+        git_command("rev-parse;--verify;--short;HEAD" ${PROJECT_NAME}_git_sha)
 
-    if (tag_list MATCHES "^$")
-        # Use v0.0.0 if there aren't tags yet
-        set(${PROJECT_NAME}_git_tag "v0.0.0")
-        git_command("rev-list;--count;HEAD" ${PROJECT_NAME}_git_build_number)
-    else ()
-        git_command("describe;--tags;--abbrev=0" ${PROJECT_NAME}_git_tag)
+        # Tag
+        git_command("tag" tag_list)
 
-        # Build number
-        git_command("rev-list;--count;HEAD;^${${PROJECT_NAME}_git_tag}" ${PROJECT_NAME}_git_build_number)
-
-    endif ()
-
-    # Status (dirty?)
-    git_command("diff;--shortstat" ${PROJECT_NAME}_git_status)
-
-    if (${PROJECT_NAME}_git_status MATCHES "changed")
-        set(${PROJECT_NAME}_git_status "dirty")
-    else ()
-        unset(${PROJECT_NAME}_git_status)
-    endif ()
-
-    # Get version components
-    set(semver_normal_regex "v(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)")
-    set(semver_prerelease_regex "(-((0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*)(\\.(0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*))*))")
-    set(semver_regex "^${semver_normal_regex}${semver_prerelease_regex}?$")
-    if (NOT ${PROJECT_NAME}_git_tag MATCHES ${semver_regex})
-        message(FATAL_ERROR "Tag, \"${${PROJECT_NAME}_git_tag}\", does not conform to SemVer \"${${PROJECT_NAME}_semver_regex}\".")
-    endif ()
-
-    string(REGEX REPLACE ${semver_regex} "\\1" ${PROJECT_NAME}_version_major "${${PROJECT_NAME}_git_tag}")
-    string(REGEX REPLACE ${semver_regex} "\\2" ${PROJECT_NAME}_version_minor "${${PROJECT_NAME}_git_tag}")
-    string(REGEX REPLACE ${semver_regex} "\\3" ${PROJECT_NAME}_version_patch "${${PROJECT_NAME}_git_tag}")
-    if (${PROJECT_NAME}_git_tag MATCHES "^${semver_normal_regex}${semver_prerelease_regex}$")
-        string(REGEX REPLACE ${semver_regex} "\\4" ${PROJECT_NAME}_version_prerelease "${${PROJECT_NAME}_git_tag}")
-    else ()
-        set(${PROJECT_NAME}_version_prerelease "")
-    endif ()
-
-    # Build meta info
-    if (NOT ${PROJECT_NAME}_git_build_number MATCHES "^0$")
-        set(${PROJECT_NAME}_version_meta "+${${PROJECT_NAME}_git_branch}.${${PROJECT_NAME}_git_sha}.${${PROJECT_NAME}_git_build_number}")
-        if (DEFINED ${PROJECT_NAME}_git_status)
-            set(${PROJECT_NAME}_version_meta "${${PROJECT_NAME}_version_meta}.${${PROJECT_NAME}_git_status}")
-        endif ()
-    else ()
-        if (DEFINED ${PROJECT_NAME}_git_status)
-            set(${PROJECT_NAME}_version_meta "+${${PROJECT_NAME}_git_status}")
+        if (tag_list MATCHES "^$")
+            # Use v0.0.0 if there aren't tags yet
+            set(${PROJECT_NAME}_git_tag "v0.0.0")
+            git_command("rev-list;--count;HEAD" ${PROJECT_NAME}_git_build_number)
         else ()
-            set(${PROJECT_NAME}_version_meta "")
+            git_command("describe;--tags;--abbrev=0" ${PROJECT_NAME}_git_tag)
+
+            # Build number
+            git_command("rev-list;--count;HEAD;^${${PROJECT_NAME}_git_tag}" ${PROJECT_NAME}_git_build_number)
+
         endif ()
+
+        # Status (dirty?)
+        git_command("diff;--shortstat" ${PROJECT_NAME}_git_status)
+
+        if (${PROJECT_NAME}_git_status MATCHES "changed")
+            set(${PROJECT_NAME}_git_status "dirty")
+        else ()
+            unset(${PROJECT_NAME}_git_status)
+        endif ()
+
+        # Get version components
+        set(semver_normal_regex "v(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)")
+        set(semver_prerelease_regex "(-((0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*)(\\.(0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*))*))")
+        set(semver_regex "^${semver_normal_regex}${semver_prerelease_regex}?$")
+        if (NOT ${PROJECT_NAME}_git_tag MATCHES ${semver_regex})
+            message(FATAL_ERROR "Tag, \"${${PROJECT_NAME}_git_tag}\", does not conform to SemVer \"${${PROJECT_NAME}_semver_regex}\".")
+        endif ()
+
+        string(REGEX REPLACE ${semver_regex} "\\1" ${PROJECT_NAME}_version_major "${${PROJECT_NAME}_git_tag}")
+        string(REGEX REPLACE ${semver_regex} "\\2" ${PROJECT_NAME}_version_minor "${${PROJECT_NAME}_git_tag}")
+        string(REGEX REPLACE ${semver_regex} "\\3" ${PROJECT_NAME}_version_patch "${${PROJECT_NAME}_git_tag}")
+        if (${PROJECT_NAME}_git_tag MATCHES "^${semver_normal_regex}${semver_prerelease_regex}$")
+            string(REGEX REPLACE ${semver_regex} "\\4" ${PROJECT_NAME}_version_prerelease "${${PROJECT_NAME}_git_tag}")
+        else ()
+            set(${PROJECT_NAME}_version_prerelease "")
+        endif ()
+
+        # Build meta info
+        if (NOT ${PROJECT_NAME}_git_build_number MATCHES "^0$")
+            set(${PROJECT_NAME}_version_meta "+${${PROJECT_NAME}_git_branch}.${${PROJECT_NAME}_git_sha}.${${PROJECT_NAME}_git_build_number}")
+            if (DEFINED ${PROJECT_NAME}_git_status)
+                set(${PROJECT_NAME}_version_meta "${${PROJECT_NAME}_version_meta}.${${PROJECT_NAME}_git_status}")
+            endif ()
+        else ()
+            if (DEFINED ${PROJECT_NAME}_git_status)
+                set(${PROJECT_NAME}_version_meta "+${${PROJECT_NAME}_git_status}")
+            else ()
+                set(${PROJECT_NAME}_version_meta "")
+            endif ()
+        endif ()
+
+
+    else ()
+
+        message(WARNING "Failed to find git executable. Unable to establish version information for ${PROJECT_NAME}.")
+        set(${PROJECT_NAME}_version_major "0")
+        set(${PROJECT_NAME}_version_minor "0")
+        set(${PROJECT_NAME}_version_patch "0")
+        set(${PROJECT_NAME}_version_meta "+git.not.found")
+
     endif ()
 
+    set(${PROJECT_NAME}_version "v${${PROJECT_NAME}_version_major}.${${PROJECT_NAME}_version_minor}.${${PROJECT_NAME}_version_patch}${${PROJECT_NAME}_version_prerelease}${${PROJECT_NAME}_version_meta}")
 
-else ()
-
-    message(WARNING "Failed to find git executable. Unable to establish version information for ${PROJECT_NAME}.")
-    set(${PROJECT_NAME}_version_major "0")
-    set(${PROJECT_NAME}_version_minor "0")
-    set(${PROJECT_NAME}_version_patch "0")
-    set(${PROJECT_NAME}_version_meta "+git.not.found")
-
-endif ()
-
-set(${PROJECT_NAME}_version "v${${PROJECT_NAME}_version_major}.${${PROJECT_NAME}_version_minor}.${${PROJECT_NAME}_version_patch}${${PROJECT_NAME}_version_prerelease}${${PROJECT_NAME}_version_meta}")
-
-message(STATUS "Making ${PROJECT_NAME}: ${${PROJECT_NAME}_version}")
+endmacro()
 
 macro(add_version_variable version_variable)
     string(TOUPPER ${version_variable} temp_upper)
