@@ -7,6 +7,8 @@
 #include <functional>
 #include <string_view>
 
+#include <atheneum/version.h>
+
 namespace Atheneum
 {
 

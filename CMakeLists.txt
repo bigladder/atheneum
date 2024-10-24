@@ -11,8 +11,6 @@ if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
             "MinSizeRel" "RelWithDebInfo")
 endif ()
 
-find_package(Git QUIET)
-
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 include(CMakeDependentOption)
@@ -28,6 +26,12 @@ if (NOT ${PROJECT_NAME}_STATIC_LIB)
 endif ()
 
 include(build-options-interface)
+
+# Automatic generation of version info
+include(git-versioning)
+process_git_version()
+make_version_header()
+message(STATUS "Building ${PROJECT_NAME} ${${PROJECT_NAME}_version}")
 
 # Set up testing/coverage
 if (${PROJECT_NAME}_BUILD_TESTING)

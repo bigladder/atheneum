@@ -33,7 +33,7 @@ Manages the overall build with specific scripts for handling:
 - Defaulting build type (i.e., Release)
 - [Uniform compiler flags](cmake/build-options-interface.cmake)
 - Identifying build target architecture (i.e., operating system, compiler, and CPU instruction architecture) (TODO)
-- Automatic versioning based on Git repository tags (TODO)
+- [Automatic versioning based on Git repository tags](cmake/git-versioning.cmake)
 - Optional static or dynamic libraries
 - Handling of MSVC and Windows specific requirements (e.g., MT/MD flags, export headers)
 
@@ -60,7 +60,9 @@ IDE, which can be configured to automatically format code upon file-save. Else,
 * On Mac, `brew install clang-format` and run at the command line with `clang-format -i <file>`
 * On Ubuntu, `sudo apt install clang-format` and run at the command line with `clang-format -i <file>`
 
-**NOTE**: ensure the version of clang-format your development team is using locally matches the version used in `.github/workflows/clang-format-check.yml` or you may get false errors. The .clang-format file can be set to a version earlier than your current.
+**NOTE**: ensure the version of clang-format your development team is using locally matches the version used
+in `.github/workflows/clang-format-check.yml` or you may get false errors. The .clang-format file can be set to a
+version earlier than your current.
 
 ## Code Coverage: Codecov
 
