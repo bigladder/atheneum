@@ -56,3 +56,9 @@ if (${PROJECT_NAME}_BUILD_TESTING)
         coverage_evaluate()
     endif ()
 endif ()
+
+find_package(Doxygen)
+
+if (${PROJECT_NAME}_BUILD_DOCUMENTATION)
+  add_subdirectory(docs)
+endif()
