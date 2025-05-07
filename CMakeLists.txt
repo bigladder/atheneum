@@ -5,7 +5,7 @@ project(atheneum) # Replace
 find_program(CLANG_TIDY_EXE NAMES "clang-tidy")
 
 #set(CLANG_TIDY_COMMAND "${CLANG_TIDY_EXE}" "-checks=-*,clang-analyzer-*,cppcoreguidelines-*, CheckOptions=[ {key: readability-identifier-naming.MemberCase, value: CamelCase} ]")
-set(CLANG_TIDY_COMMAND "${CLANG_TIDY_EXE}" "-config={Checks: '-*,clang-analyzer-*,cppcoreguidelines-*,readability-identifier-naming', WarningsAsErrors: true, HeaderFilterRegex: 'include/atheneum/.*', CheckOptions: [ {key: readability-identifier-naming.ClassCase, value: CamelCase} ]}")
+set(CLANG_TIDY_COMMAND "${CLANG_TIDY_EXE}")
 message(STATUS ${CLANG_TIDY_COMMAND})
 
 # Set a default build type if none was specified
