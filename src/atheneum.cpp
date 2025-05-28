@@ -12,18 +12,18 @@
 namespace Atheneum
 {
 
-Atheneum::Atheneum() { atheneum = std::unique_ptr<AtheneumPrivate>(new AtheneumPrivate()); }
+atheneum::atheneum() { Atheneum = std::unique_ptr<AtheneumPrivate>(new AtheneumPrivate()); }
 
-Atheneum::~Atheneum() {}
+atheneum::~atheneum() {}
 
-int Atheneum::answer() { return atheneum->answer(); }
+int atheneum::Answer() { return Atheneum->answer(); }
 
 AtheneumPrivate::AtheneumPrivate() {}
 
 int AtheneumPrivate::answer()
 {
-    int answer = 42;
-    return answer;
+    int Answer = 42;
+    return Answer;
 }
 
 } // namespace Atheneum

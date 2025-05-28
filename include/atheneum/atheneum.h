@@ -12,15 +12,15 @@ namespace Atheneum
 
 class AtheneumPrivate;
 
-class Atheneum
+class atheneum
 {
   public:
-    Atheneum();
-    ~Atheneum();
-    int answer();
+    atheneum();
+    ~atheneum();
+    int Answer();
 
   private:
-    std::unique_ptr<AtheneumPrivate> atheneum;
+    std::unique_ptr<AtheneumPrivate> Atheneum;
 };
 
 } // namespace Atheneum

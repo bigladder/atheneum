@@ -17,11 +17,11 @@ else ()
     add_library(${PROJECT_NAME} SHARED ${library_sources})
 endif ()
 
+target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
+
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_CLANG_TIDY "${CLANG_TIDY_COMMAND}") # runs on first build
 
 target_include_directories(${PROJECT_NAME} PUBLIC "${PROJECT_SOURCE_DIR}/include" PRIVATE "${PROJECT_SOURCE_DIR}/src")
-
-target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE fmt)
 
