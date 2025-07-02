@@ -8,6 +8,7 @@ Checks:
 
 HeaderFilterRegex: 'include/atheneum/.*'
 WarningsAsErrors: true
+# SystemHeaders: false
 
 CheckOptions:
   - key: readability-identifier-naming.VariableCase
@@ -27,4 +28,6 @@ CheckOptions:
   - key: readability-identifier-naming.ParameterCase
     value: 'lower_case'
   - key: readability-identifier-naming.FunctionCase
+    value: 'lower_case'
+  - key: readability-identifier-naming.NamespaceCase
     value: 'lower_case'

@@ -1,7 +1,8 @@
-# Main library
 file(GLOB_RECURSE sources "${PROJECT_SOURCE_DIR}/src/[a-zA-Z]*.cpp")
 file(GLOB_RECURSE public_headers "${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}/[a-zA-Z]*.h")
 file(GLOB_RECURSE private_headers "${PROJECT_SOURCE_DIR}/src/[a-zA-Z]*.h")
+
+add_definitions(-D_SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS)
 
 set(library_sources
         ${sources}
@@ -19,11 +20,11 @@ endif ()
 
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 
-set_target_properties(${PROJECT_NAME} PROPERTIES CXX_CLANG_TIDY "${CLANG_TIDY_COMMAND}") # runs on first build
-
 target_include_directories(${PROJECT_NAME} PUBLIC "${PROJECT_SOURCE_DIR}/include" PRIVATE "${PROJECT_SOURCE_DIR}/src")
 
 target_link_libraries(${PROJECT_NAME} PRIVATE fmt)
+
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_CLANG_TIDY "${CLANG_TIDY_COMMAND}") #";-checks=-*,clang-analyzer-*,cppcoreguidelines-*,readability*,CheckOptions=[ {key: readability-identifier-naming.ClassCase, value: CamelCase} ]") # runs on first build
 
 include(GenerateExportHeader)
 generate_export_header(${PROJECT_NAME})

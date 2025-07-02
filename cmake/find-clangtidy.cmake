@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 3.10)
 
-if (MSVC)
+find_program(CLANG_TIDY_EXE NAMES "clang-tidy")
+#set(CLANG_TIDY_COMMAND "${CLANG_TIDY_EXE}" "-checks=-*,clang-analyzer-*,cppcoreguidelines-*, CheckOptions=[ {key: readability-identifier-naming.ClassCase, value: CamelCase} ]")
+set(CLANG_TIDY_COMMAND "${CLANG_TIDY_EXE}")
+message(STATUS ${CLANG_TIDY_COMMAND})
+
+if (CLANG_TIDY_EXE STREQUAL CLANG_TIDY_EXE-NOTFOUND)
     # Derived from https://izzys.casa/2023/09/finding-msvc-with-cmake/
     cmake_path(
         CONVERT "$ENV{ProgramFiles\(x86\)}/Microsoft Visual Studio/Installer"
@@ -26,10 +31,7 @@ if (MSVC)
         OUTPUT_STRIP_TRAILING_WHITESPACE)
     string(JSON candidates.length LENGTH "${candidates}")
     math(EXPR stop "${candidates.length} - 1")
-    string(JSON CLANG_TIDY_COMMAND GET "${candidates}" ${stop})
-    message(STATUS ${CLANG_TIDY_COMMAND})
-else()
-    find_program(CLANG_TIDY_EXE NAMES "clang-tidy")
-    #set(CLANG_TIDY_COMMAND "${CLANG_TIDY_EXE}" "-checks=-*,clang-analyzer-*,cppcoreguidelines-*, CheckOptions=[ {key: readability-identifier-naming.MemberCase, value: CamelCase} ]")
+    string(JSON CLANG_TIDY_EXE GET "${candidates}" ${stop})
     set(CLANG_TIDY_COMMAND "${CLANG_TIDY_EXE}")
+    message(STATUS ${CLANG_TIDY_COMMAND})
 endif()
